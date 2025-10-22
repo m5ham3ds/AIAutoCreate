@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_ffmpeg.xml (معدّل — مُدمج، تحكم كامل بالتفعيل/الإيقاف، جودة/نسبة، ومسارات) -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_ffmpeg_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg"
+    android:layoutDirection="rtl"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- in-app notification container -->
+        <FrameLayout
+            android:id="@+id/inapp_notif_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- ===== أسلوب المونتاج ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/spinner_style"
+                android:layout_width="160dp"
+                android:layout_height="@dimen/spinner_height"
+                android:background="@drawable/outline_border"
+                android:spinnerMode="dropdown"
+                android:entries="@array/ffmpeg_styles"
+                android:contentDescription="اختر اسلوب المونتاج" />
+            <TextView
+                android:id="@+id/tv_label_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="أسلوب المونتاج"
+                android:textColor="@color/highlight_color"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_marginLeft="16dp" />
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="12dp" />
+
+        <!-- ===== مدة الفيديو ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <Spinner
+                android:id="@+id/spinner_minutes"
+                android:layout_width="54dp"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_border"
+                android:spinnerMode="dropdown"
+                android:entries="@array/spinner_minutes"
+                android:contentDescription="دقائق" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="دقيقة"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp" />
+
+            <View android:layout_width="18dp" android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spinner_seconds"
+                android:layout_width="54dp"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_border"
+                android:spinnerMode="dropdown"
+                android:entries="@array/spinner_seconds"
+                android:contentDescription="ثواني" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ثانية"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp" />
+
+            <TextView
+                android:id="@+id/tv_video_time_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="وقت الفيديو"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="12dp" />
+
+        <!-- ===== عناصر قابلة للتفعيل/إيقاف: الصوت، البصري، الانتقالات، ذكي ===== -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- كل عنصر: مفتاح تفعيل + اسم + Spinner للاختيار (يُنشأ/يُملأ تلقائياً حسب النموذج الموحد) -->
+
+            <!-- ===== Master model / Aggregator (النموذج الموحد الذي يقرر كل شيء) ===== -->
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_model_master"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="التفعيل التلقائي (يتحكم بتوليد الإعدادات تلقائياً)"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_model_master"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/models_aggregator"
+                        android:contentDescription="نموذج التجميع" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="نموذج موحّد (يتحكم بتوليد الإعدادات تلقائياً) — قابل للتفعيل/الإيقاف"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="10dp" />
+            
+            <!-- Audio effect (Auto model) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_audio_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="تفعيل الاختيار التلقائي للموثرات الصوتية"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_audio_effects"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/audio_effects"
+                        android:contentDescription="نموذج المؤثر الصوتي" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="مؤثر صوتي (تلقائي/اختياري)"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="10dp" />
+
+            <!-- Visual effect (Auto model) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_visual_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="تفعيل الاختيار التلقائي للموثرات االبصرية"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_visual_effects"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/visual_effects"
+                        android:contentDescription="نموذج المؤثر البصري" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="مؤثر بصري (تلقائي/اختياري)"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="10dp" />
+
+            <!-- Transitions (Auto model) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_transitions_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="تفعيل الاختيار التلقائي للانتقالات"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_transitions"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/transitions"
+                        android:contentDescription="نموذج الانتقالات" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="الانتقالات (تلقائي/اختياري)"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="10dp" />
+
+            <!-- ===== Smart count (enable + choice) ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_smartcount_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="عدد ذكي للانتقالات/المؤثرات"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_smart_count"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/spinner_smart_count"
+                        android:contentDescription="عدد ذكي" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="نموزج الاختيار التلقائي لعدد الانتقالات و الموثرات"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="10dp" />
+
+            <!-- ===== Subtitles (تم تضمين تفعيل + نموذج ASR) ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_subtitles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="تفعيل الترجمة"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_model_subtitle"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/models_asr"
+                        android:contentDescription="نموذج الترجمة (ASR)" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="نموذج الترجمة (ASR)"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="12dp" />
+
+            <!-- ===== Background music (توليد/تمكين) ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Switch
+                        android:id="@+id/switch_music"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="تفعيل الموسيقى الخلفية (تلقائي من السكربت)"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="16sp"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <Spinner
+                        android:id="@+id/spinner_model_music_bg"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/outline_border"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/models_music_bg"
+                        android:contentDescription="نموذج الموسيقى الخلفية" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="نموذج الموسيقى الخلفية"
+                        android:textColor="@color/highlight_color"
+                        android:textSize="15sp"
+                        android:gravity="right" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="16dp" />
+
+            <!-- ===== جودة الفيديو و نسبة العرض:الارتفاع ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <Spinner
+                    android:id="@+id/spinner_video_quality"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/outline_border"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/video_qualities"
+                    android:contentDescription="جودة الفيديو" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="جودة الفيديو"
+                    android:textColor="@color/highlight_color"
+                    android:textSize="15sp"
+                    android:gravity="right"
+                    android:layout_marginLeft="12dp" />
+
+                <View android:layout_width="16dp" android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/spinner_aspect_ratio"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/outline_border"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/aspect_ratios"
+                    android:contentDescription="نسبة العرض:الارتفاع" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="نسبة العرض:الارتفاع"
+                    android:textColor="@color/highlight_color"
+                    android:textSize="15sp"
+                    android:gravity="right" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="18dp" />
+
+        </LinearLayout>
+
+        <!-- ===== نموذج شامل يجهّز ويولّد أوامر FFmpegkit ===== -->            
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Switch
+                android:id="@+id/switch_master_orchestrator_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="تفعيل الاختيار التلقائي لنموزج جميع المعلومات وتحويله الى اومر "
+                android:textColor="@color/highlight_color"
+                android:textSize="16sp"
+                android:gravity="right" />
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/spinner_master_orchestrator"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_border"
+                android:spinnerMode="dropdown"
+                android:entries="@array/models_orchestrator"
+                android:contentDescription="نموذج الأوركسترا" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="نموذج الأوركسترا (ينتج إعدادات + أوامر FFmpegkit)"
+                android:textColor="@color/highlight_color"
+                android:textSize="15sp"
+                android:gravity="right" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="10dp" />
+   
+        <!-- ===== قسم المراجع/المخطط (يوجد هنا بدلاً من @@@@) ===== -->   
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <Switch
+                    android:id="@+id/switch_reviewer_enabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="تقعيل  لنموزج مراجعة المعلومات وارياله الى الاوركيستراffmpegkit"
+                    android:textColor="@color/highlight_color"
+                    android:textSize="16sp"
+                    android:gravity="right" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="6dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <Spinner
+                    android:id="@+id/spinner_model_reviewer"
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/outline_border"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/models_reviewer"
+                    android:contentDescription="نموذج المراجع/المخطط" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="نموذج المراجع (يقرأ مخرجات النماذج والسكربت ويقترح المخطط بدون تغيير المدخلات)"
+                    android:textColor="@color/highlight_color"
+                    android:textSize="15sp"
+                    android:gravity="right" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- ===== مسارات الملفات الافتراضية (قراءة فقط، يمكن عرضها للمستخدم) ===== -->
+        <TextView
+            android:id="@+id/tv_paths_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="مسارات الموارد (تنزيل/حفظ تلقائي)"
+            android:textColor="@color/highlight_color"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_path_scripts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="/storage/emulated/0/AIAutoCreate/SCRIPTS"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="6dp" />
+
+        <TextView
+            android:id="@+id/tv_path_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="/storage/emulated/0/AIAutoCreate/IMAGES"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_path_videos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="/storage/emulated/0/AIAutoCreate/VIDEOS"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_path_audios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="/storage/emulated/0/AIAutoCreate/AUDIOS"
+            android:textColor="#DDDDDD"
+            android:textSize="13sp"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:id="@+id/tv_path_errors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="/storage/emulated/0/AIAutoCreate/ERRORS"
+            android:textColor="#FF6B6B"
+            android:textSize="13sp"
+            android:paddingTop="2dp"
+            android:paddingBottom="12dp" />
+
+        <!-- ===== أزرار الحفظ/إعادة تحميل ===== -->
+        <Button
+            android:id="@+id/btn_save_ffmpeg"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="حفظ التعديلات"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:background="@drawable/outline_border"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btn_reload_style"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="استدعاء إعدادات الأسلوب المحفوظة"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:background="@drawable/outline_border"
+            android:layout_marginBottom="18dp" />
+
+        <TextView
+            android:id="@+id/tv_ffmpeg_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ملاحظة: النموذج الموحد يقوم بتوليد الإعدادات تلقائياً. جميع الخيارات أعلاه قابلة للتفعيل/الإيقاف من قبل المستخدم."
+            android:textColor="#BBBBBB"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginBottom="28dp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:padding="15dp"
+    android:layoutDirection="rtl">
+
+    <!-- أعلى الصفحة: القوائم -->
+    <LinearLayout
+        android:id="@+id/top_options"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/sp_image_style"
+                android:layout_width="160dp"
+                android:layout_height="@dimen/spinner_height"
+                android:background="@drawable/spinner_box" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اختيار استايل الصورة"
+                android:textColor="@color/highlight_color"
+                android:textSize="18sp"
+                android:layout_marginLeft="55dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/sp_cover_style"
+                android:layout_width="160dp"
+                android:layout_height="@dimen/spinner_height"
+                android:background="@drawable/spinner_box" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اختيار استايل الغلاف"
+                android:textColor="@color/highlight_color"
+                android:textSize="18sp"
+                android:layout_marginLeft="55dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/sp_voice"
+                android:layout_width="160dp"
+                android:layout_height="@dimen/spinner_height"
+                android:background="@drawable/spinner_box" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اختيار صوت"
+                android:textColor="@color/highlight_color"
+                android:textSize="18sp"
+                android:layout_marginLeft="108dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/sp_video_style"
+                android:layout_width="160dp"
+                android:layout_height="@dimen/spinner_height"
+                android:background="@drawable/spinner_box"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اختيار اسلوب الفيديو"
+                android:textColor="@color/highlight_color"
+                android:textSize="18sp"
+                android:layout_marginLeft="53dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Spinner
+                android:id="@+id/sp_montage"
+                android:layout_width="160dp"
+                android:layout_height="@dimen/spinner_height"
+                android:background="@drawable/spinner_box"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اختيار اسلوب المونتاج"
+                android:textColor="@color/highlight_color"
+                android:textSize="18sp"
+                android:layout_marginLeft="46dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_status"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|right"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/pb_small"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:indeterminate="true"
+                android:layout_marginRight="8dp" />
+
+            <TextView
+                android:id="@+id/tv_inline_status_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="جاري المعالجة..."
+                android:textColor="@color/muted_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- المحتوى القابل للتمرير: يجب أن يكون فوق حاوية الـ prompt -->
+    <ScrollView
+        android:id="@+id/main_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="ifContentScrolls"
+        android:layout_below="@id/top_options"
+        android:layout_above="@+id/prompt_holder">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_logs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logs"
+                android:textColor="@color/highlight_color"
+                android:layout_marginBottom="12dp"
+                android:textSize="16sp" />
+
+            <VideoView
+                android:id="@+id/video_preview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- حاوية الحقل: تبقى في أسفل الفراجمنت وتتحرك مع اعادة تحجيم النافذة (adjustResize) -->
+    <RelativeLayout
+        android:id="@+id/prompt_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:background="#000000">
+
+        <EditText
+            android:id="@+id/et_prompt"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:background="@drawable/outline_border"
+            android:hint="اكتب رسالة..."
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textColor="@color/highlight_color" />
+
+        <TextView
+            android:id="@+id/tv_inline_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="جاري معالجة الطلب..."
+            android:textColor="@color/muted_text"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="15dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_go"
+            android:layout_width="@dimen/circle_button_size"
+            android:layout_height="@dimen/circle_button_size"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/circle_button"
+            android:text="Go"
+            android:textColor="@color/highlight_color" />
+    </RelativeLayout>
+</RelativeLayout>

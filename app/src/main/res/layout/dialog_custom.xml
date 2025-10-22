@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/img_dialog_bg"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dialog_bg"
+        android:alpha="1.0" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="14dp"
+        android:background="#000000">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="عنوان الحوار"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/highlight_color"
+            android:gravity="right"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="نص الشرح أو الرسالة."
+            android:textSize="15sp"
+            android:textColor="@color/muted_text"
+            android:gravity="right"
+            android:layout_marginBottom="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|right">
+
+            <Button
+                android:id="@+id/dialog_negative"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="لا"
+                android:textColor="@color/highlight_color"
+                android:background="@drawable/outline_border"
+                android:layout_marginLeft="8dp" />
+
+            <Button
+                android:id="@+id/dialog_positive"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="نعم"
+                android:textColor="@android:color/white"
+                android:background="@drawable/circle_button" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

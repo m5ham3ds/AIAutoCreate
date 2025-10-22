@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- أساليب المونتاج المستخدمة بالـ Spinner -->
+    <string-array name="ffmpeg_styles">
+        <item>قصص وروايات</item>
+        <item>حماسي وجذاب</item>
+        <item>احترافية وأنيق</item>
+        <item>مخصص</item>
+    </string-array>
+
+    <!-- نسخة بديلة إذا كانت بعض الشاشات تشير spinner_style -->
+    <string-array name="spinner_style">
+        <item>قصص وروايات</item>
+        <item>حماسي وجذاب</item>
+        <item>احترافية وأنيق</item>
+        <item>مخصص</item>
+    </string-array>
+
+    <!-- دقائق 00..10 -->
+    <string-array name="spinner_minutes">
+        <item>00</item><item>01</item><item>02</item><item>03</item><item>04</item>
+        <item>05</item><item>06</item><item>07</item><item>08</item><item>09</item>
+        <item>10</item>
+    </string-array>
+
+    <!-- ثواني 00..59 -->
+    <string-array name="spinner_seconds">
+        <item>00</item><item>01</item><item>02</item><item>03</item><item>04</item>
+        <item>05</item><item>06</item><item>07</item><item>08</item><item>09</item>
+        <item>10</item><item>11</item><item>12</item><item>13</item><item>14</item>
+        <item>15</item><item>16</item><item>17</item><item>18</item><item>19</item>
+        <item>20</item><item>21</item><item>22</item><item>23</item><item>24</item>
+        <item>25</item><item>26</item><item>27</item><item>28</item><item>29</item>
+        <item>30</item><item>31</item><item>32</item><item>33</item><item>34</item>
+        <item>35</item><item>36</item><item>37</item><item>38</item><item>39</item>
+        <item>40</item><item>41</item><item>42</item><item>43</item><item>44</item>
+        <item>45</item><item>46</item><item>47</item><item>48</item><item>49</item>
+        <item>50</item><item>51</item><item>52</item><item>53</item><item>54</item>
+        <item>55</item><item>56</item><item>57</item><item>58</item><item>59</item>
+    </string-array>
+
+    <!-- الآن: المؤثرات الصوتية تُعرض كموديلات تحليل/تمييز صوتي (لا توجد خيارات يدوية) -->
+    <string-array name="audio_effects">
+        <item>qualcomm/YamNet</item>
+        <item>qiuqiangkong/PANNs</item>
+        <item>wsntxxn/effb2-trm-audiocaps-captioning</item>
+    </string-array>
+
+    <!-- الآن: المؤثرات البصرية تُعرض كموديلات تحليل/استخراج لقطات/محددات بصرية -->
+    <string-array name="visual_effects">
+        <item>SmolVLM2</item>
+        <item>Yongxin-Guo/TRACE</item>
+        <item>PySceneDetect</item>
+    </string-array>
+
+    <!-- الآن: الانتقالات تُستنتج باستخدام نماذج VAD/diarization أو أدوات beat/onset.
+    هنا نعرض نماذج VAD/diarization كخيارات للـ "انتقالات" الذكية -->
+    <string-array name="transitions">
+        <item>pyannote/voice-activity-detection</item>
+        <item>BUT-FIT/diarizen-wavlm-large-s80-md</item>
+        <item>nvidia/diar_sortformer_4spk-v1</item>
+    </string-array>
+
+    <!-- smart count 1..12 -->
+    <string-array name="spinner_smart_count">
+        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item>
+        <item>6</item><item>7</item><item>8</item><item>9</item><item>10</item>
+        <item>11</item><item>12</item>
+    </string-array>
+
+    <!-- الموديلات المقترحة — ASR (لـ تحويل الكلام إلى نص) -->
+    <string-array name="models_asr">
+        <item>openai/whisper-large-v3</item>
+        <item>facebook/wav2vec2-large-960h-lv60</item>
+        <item>jonatasgrosman/wav2vec2-large-xlsr-53-arabic</item>
+    </string-array>
+
+    <!-- VAD / Diarization (يمكن استخدامها لتحديد المتكلمين/فترات الصمت) -->
+    <string-array name="models_vad">
+        <item>pyannote/voice-activity-detection</item>
+        <item>BUT-FIT/diarizen-wavlm-large-s80-md</item>
+        <item>nvidia/diar_sortformer_4spk-v1</item>
+    </string-array>
+
+    <!-- audio event / captioning -->
+    <string-array name="models_audio_event">
+        <item>qualcomm/YamNet</item>
+        <item>qiuqiangkong/PANNs</item>
+        <item>wsntxxn/effb2-trm-audiocaps-captioning</item>
+    </string-array>
+
+    <!-- beat/onset tools -->
+    <string-array name="models_beat_tool">
+        <item>librosa</item><item>madmom</item><item>aubio</item>
+    </string-array>
+
+    <!-- video highlights / shot detection -->
+    <string-array name="models_video_highlight">
+        <item>SmolVLM2</item><item>Yongxin-Guo/TRACE</item><item>PySceneDetect</item>
+    </string-array>
+
+    <!-- aggregator / multimodal pipeline -->
+    <string-array name="models_aggregator">
+        <item>SmolVLM2+TRACE pipeline</item><item>Custom heuristics + LLM</item><item>HF Spaces aggregator</item>
+    </string-array>
+
+    <!-- نماذج/خدمات اقتراح / توليد موسيقى خلفية -->
+    <string-array name="models_music_bg">
+        <item>Mubert API (loopable)</item>
+        <item>OpenAI Jukebox (موديل مبدع)</item>
+        <item>AIVA-like Composer</item>
+        <item>Custom Music Recommender</item>
+    </string-array>
+
+    <!-- أنواع جودة الفيديو (تُستخدم لتحديد إعداد الإخراج) -->
+    <string-array name="video_qualities">
+        <item>4K</item>
+        <item>1080p</item>
+        <item>720p</item>
+        <item>480p</item>
+        <item>360p</item>
+    </string-array>
+
+    <!-- نسب العرض:الارتفاع الشائعة -->
+    <string-array name="aspect_ratios">
+        <item>16:9</item>
+        <item>9:16</item>
+        <item>4:3</item>
+        <item>1:1</item>
+    </string-array>
+
+    <!-- نماذج الأوركسترا / الموجهة لتوليد أوامر FFmpeg (اختياري) -->
+    <string-array name="models_orchestrator">
+        <item>orchestrator/v1-small</item>
+        <item>orchestrator/v1-balanced</item>
+        <item>orchestrator/v1-highquality</item>
+        <item>orchestrator/llm-guided-preset</item>
+    </string-array>
+
+    <!-- نموذج "المراجع" (Reviewer) — يراجع نتائج النماذج الأخرى والسكربت ويقترح خطة المونتاج -->
+    <string-array name="models_reviewer">
+        <item>reviewer/v1-small</item>
+        <item>reviewer/v1-balanced</item>
+        <item>reviewer/llm-summary</item>
+    </string-array>
+
+</resources>

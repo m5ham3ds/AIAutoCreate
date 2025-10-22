@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- عام -->
+    <string name="app_name">AI AutoCreate</string>
+
+    <!-- عناصر الواجهة الأساسية -->
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="settings">الإعدادات</string>
+    <string name="generate">إنشاء</string>
+
+    <!-- عناوين / تسميات متعلقة بصفحة FFmpeg -->
+    <string name="ffmpeg_settings">إعدادات المونتاج (FFmpeg)</string>
+    <string name="style_label">أسلوب المونتاج</string>
+    <string name="video_time">وقت الفيديو</string>
+    <string name="minutes">دقيقة</string>
+    <string name="seconds">ثانية</string>
+    <string name="audio_effects">المؤثرات الصوتية</string>
+    <string name="visual_effects">المؤثرات البصرية</string>
+    <string name="transitions">الانتقالات</string>
+    <string name="smart_count">العدد الذكي</string>
+    <string name="ffmpeg_note">ملاحظة: الإعدادات هنا تتحكم في سلوك FFmpegkit عند تركيب الفيديو الانهائي.</string>
+
+    <!-- أزرار -->
+    <string name="save_changes">حفظ التعديلات</string>
+    <string name="reload_style">استدعاء إعدادات الأسلوب</string>
+
+    <!-- أسماء الأساليب (تُستخدم لتعبئة الـ Spinner أو عرض حالياً) -->
+    <string name="style_story">قصص وروايات</string>
+    <string name="style_exciting">حماسي وجذاب</string>
+    <string name="style_professional">احترافية وأنيق</string>
+    <string name="style_custom">مخصص</string>
+
+    <!-- خيارات مشتركة -->
+    <string name="none">بدون</string>
+
+    <!-- تسميات الأيقونات / وصف المحتوى (contentDescription) -->
+    <string name="nav_home">زر الصفحة الرئيسية</string>
+    <string name="nav_location">زر صفحة التجربة</string>
+    <string name="nav_ffmpeg">زر إعدادات المونتاج</string>
+</resources>

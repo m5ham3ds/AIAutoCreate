@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        applicationId "com.example.aiautocreate"
+        minSdkVersion 14
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+
+    // دعم ميزات Java 8 لبعض المكتبات الحديثة
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // منع مشاكل ملفات META-INF المكررة أثناء الربط
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+// السماح بقراءة ملفات aar/jar الموجودة داخل app/libs
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    // يضم أي ملف .jar أو .aar وضعتَه داخل app/libs
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    // ===== Annotation processors محلياً (مثال: Glide compiler) =====
+    // إذا وضعت ملف compiler-4.12.0.jar داخل app/libs فسيُستخدم كمُعالِج للتعليقات التوضيحية
+    if (file('libs/compiler-4.12.0.jar').exists()) {
+        annotationProcessor files('libs/compiler-4.12.0.jar')
+    }
+
+    // ===== تحذير / ملاحظة هامة للتشغيل في AIDE بدون إنترنت =====
+    // إذا تعمل OFFLINE داخل AIDE فا **لا** تترك أسطر implementation التالية مفعلّة لأنها ستجرب تحميل المكتبات من الإنترنت.
+    // بدلاً من ذلك ضَع ملفات AAR/JAR المناسبة داخل app/libs (السكربت الذي شغّلته ينسخها هناك).
+    //
+    // الأسطر أدناه مبقيّة كمثال — علّمها (أزل //) إذا كنت تستخدم Gradle مع اتصال إنترنت عبر Android Studio أو غيره.
+    //
+    // implementation 'com.android.support:appcompat-v7:28.0.0'
+    // implementation 'com.android.support:design:28.0.0'
+    // implementation 'com.android.support:support-v4:28.0.0'
+    // implementation 'com.android.support:cardview-v7:28.0.0'
+    // implementation 'com.android.support:recyclerview-v7:28.0.0'
+    // implementation 'com.android.support:support-annotations:28.0.0'
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ارتفاع الهيدر -->
+    <dimen name="header_height">44dp</dimen>
+    <!-- سمك الإطار (مصغر للنصف) -->
+    <dimen name="header_stroke_width">1.5dp</dimen>
+    <dimen name="header_corner_radius">18dp</dimen>
+    <dimen name="header_padding_v">4dp</dimen>
+    <dimen name="header_padding_h">6dp</dimen>
+    <!-- أيقونات -->
+    <dimen name="icon_size">44dp</dimen>
+    <dimen name="bottom_nav_height">52dp</dimen>
+    <!-- أزرار وحجم الدائرة -->
+    <dimen name="circle_button_size">48dp</dimen>
+    <!-- spinner / inputs -->
+    <dimen name="spinner_height">44dp</dimen>
+</resources>

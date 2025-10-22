@@ -1,0 +1,12 @@
+# view res/layout/activity_main.xml #generated:2
+-keep class android.support.v4.widget.DrawerLayout { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.example.aiautocreate.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.example.aiautocreate.PipelineService { <init>(...); }
+
+# view AndroidManifest.xml #generated:94
+-keep class com.example.aiautocreate.SettingsActivity { <init>(...); }
+

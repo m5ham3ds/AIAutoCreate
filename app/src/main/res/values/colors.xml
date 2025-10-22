@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="highlight_color">#FFFFFFFF</color>     <!-- لون التوضيح المركزي -->
+    <color name="accent_purple">#5B2C6F</color>
+    <color name="app_bg">#000000</color>
+    <color name="muted_text">#EEEEEE</color>
+    <color name="connection_connected_color">#FF8BC34A</color>
+    <color name="connection_disconnected_color">#FF0000</color>
+    <color name="highlight_colors">#AA8888</color>
+</resources>

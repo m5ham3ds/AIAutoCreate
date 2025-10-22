@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/op_card_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:padding="12dp"
+    android:background="@drawable/outline_border" >
+
+    <!-- Title row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/op_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="status icon"
+            android:src="@drawable/ic_check_circle"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/op_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="اسم العملية"
+            android:textColor="@color/highlight_color"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="2" />
+    </LinearLayout>
+
+    <!-- Status line -->
+    <TextView
+        android:id="@+id/op_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="جاري الإعداد..."
+        android:textSize="14sp"
+        android:layout_marginTop="6dp"
+        android:textColor="@android:color/darker_gray" />
+
+    <!-- Per-card horizontal progress (hidden by default) -->
+    <ProgressBar
+        android:id="@+id/op_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginTop="8dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+        android:visibility="gone" />
+
+    <!-- Text content (collapsed by default) -->
+    <TextView
+        android:id="@+id/op_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:padding="6dp"
+        android:lineSpacingExtra="2dp"
+        android:ellipsize="end"
+        android:maxLines="3" />
+
+    <!-- Divider between text and media -->
+    <View
+        android:id="@+id/op_media_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="gone" />
+
+    <!-- Media container: NO ScrollView — عناصر الوسائط موجودة هنا (مخفية افتراضياً) -->
+    <LinearLayout
+        android:id="@+id/op_media_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:animateLayoutChanges="true"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <!-- Images row: أفقي. ضع ImageView برمجياً داخل op_media_images -->
+        <HorizontalScrollView
+            android:id="@+id/op_media_images_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:fillViewport="false"
+            android:scrollbars="none"
+            android:layout_marginBottom="8dp">
+
+            <LinearLayout
+                android:id="@+id/op_media_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingRight="4dp"
+                android:paddingEnd="4dp" />
+        </HorizontalScrollView>
+
+        <!-- Video placeholder (مخفي حتى يتم تفعيله برمجياً) -->
+        <VideoView
+            android:id="@+id/op_media_video"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <!-- Audio area: زر تشغيل واسم الملف -->
+        <LinearLayout
+            android:id="@+id/op_media_audio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/op_audio_play_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/ic_media_play"
+                android:contentDescription="play" />
+
+            <TextView
+                android:id="@+id/op_audio_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="audio.mp3"
+                android:ellipsize="end"
+                android:maxLines="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
